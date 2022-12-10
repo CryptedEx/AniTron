@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import AniList from '@services/AniList';
-import AniSkip from '@services/AniSkip';
 import {useRouter} from 'next/router';
 import Utility from '@services/Utility';
 import {NextSeo} from 'next-seo';
@@ -17,21 +16,13 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import Image from 'next/image';
 import {GetServerSideProps} from 'next';
 
-const Watch = ({anime, episodeData, animeData, skipTime, err}: {
+const Watch = ({anime, episodeData, watchData, skipTime}: {
     anime: any,
     episodeData: any,
-    animeData: any,
+    watchData: any,
     skipTime: any,
-    err: boolean
 }) => {
     const router = useRouter();
-
-    useEffect(() => {
-        if (err) {
-            router.push('/404');
-        }
-        //eslint-disable-next-line
-    }, [err]);
 
     function handleProvider(data): void {
         router.query.prov = data.value;
@@ -71,13 +62,12 @@ const Watch = ({anime, episodeData, animeData, skipTime, err}: {
             />
             <div>
                 <div className={"flex flex-col flex-wrap pb-[5rem]"}>
-                    {animeData?.sources &&
+                    {watchData &&
                         <Plyr
-                            src={animeData.sources.find((src) => src.quality === 'default')?.url || animeData.sources.find((src) => src.quality === 'auto')?.url || animeData.sources[0]?.url}
-                            subtitles={animeData.subtitles || null} skipTime={skipTime || null}
+                            watchData={watchData} skipTime={skipTime || null}
                             banner={episodeData.image} id={anime.id} ep={+router.query.ep}/>
                     }
-                    {!animeData?.sources &&
+                    {!watchData &&
                         <div>
                             <p className={"flex justify-center mt-[5rem] text-white"}>Hmm, our servers died. Try
                                 changing providers</p>
@@ -187,11 +177,7 @@ const Watch = ({anime, episodeData, animeData, skipTime, err}: {
 
 export const getServerSideProps: GetServerSideProps = async ({query, res}) => {
     res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=59');
-    if (!query.id || !query.ep) return {
-        props: {
-            err: true,
-        },
-    };
+    if (!query.id || !query.ep || +query.ep < 1) return {notFound: true}
 
     let prov: string
     if (!query.prov || (query.prov && !providerOptions.find((option) => option.value === query.prov))) prov = 'gogoanime';
@@ -202,32 +188,41 @@ export const getServerSideProps: GetServerSideProps = async ({query, res}) => {
         query.prov !== 'zoro' ? AniList.getAnimeInfo(+query.id, prov) : null
     ]);
 
-    if (Number(query.ep) > animeSrc?.episodes?.length || Number(query.ep) > anime?.episodes?.length || Number(query.ep) < 1) {
+    if (+query.ep > animeSrc?.episodes?.length || +query.ep > anime?.episodes?.length || +query.ep < 1) {
         res.statusCode = 404;
-        return {props: {err: true}};
+        return {notFound: true};
     }
 
-    const zoroId: any = anime?.episodes?.find((e) => e.number === Number(query.ep));
+    const zoroId: any = anime?.episodes?.find((e) => e.number === +query.ep);
 
-    const [animeWatchData, zoroWatchData]: any = await Promise.all([
-        query.prov !== 'zoro' ? AniList.getStreamingUrls(animeSrc?.episodes?.find((e) => e.number === Number(query.ep)).id, prov) : null,
+    const [watchData, zoroWatchData]: any = await Promise.all([
+        query.prov !== 'zoro' ? AniList.getStreamingUrls(animeSrc?.episodes?.find((e) => e.number === +query.ep).id, prov) : null,
         AniList.getStreamingUrls(zoroId?.id, 'zoro')
     ]);
-
-    let skipTime = zoroWatchData?.intro
-    //todo
-    // let [skipTime] = await Promise.all([
-    //     AniSkip.getSkip(anime.malId, +query.ep, anime.type === 'TV' ? 24 : anime.duration)
-    // ]);
-    //
-    // if (skipTime.statusCode === 404) skipTime = zoroWatchData?.intro
-
+    
     return {
         props: {
-            anime: anime || animeSrc || null,
+            anime: {
+                id: anime.id || animeSrc.id || null,
+                title: anime.title || animeSrc.title || null,
+                image: anime.image || animeSrc.image || null,
+                rating: anime.rating || animeSrc.rating || null,
+                season: anime.season || animeSrc.season || null,
+                type: anime.type || animeSrc.type || null,
+                status: anime.status || animeSrc.status || null,
+                duration: anime.duration || animeSrc.duration || null,
+                genres: anime.genres || animeSrc.genres || null,
+                description: anime.description || animeSrc.description || null,
+                totalEpisodes: anime.totalEpisodes || animeSrc.totalEpisodes || null,
+                nextAiringEpisode: anime.nextAiringEpisode || animeSrc.nextAiringEpisode || null,
+                recommendations: anime.recommendations || animeSrc.recommendations || null,
+            },
             episodeData: zoroId || animeSrc?.episodes?.find((e) => e.number === +query.ep) || null,
-            animeData: query.prov !== 'zoro' ? animeWatchData : zoroWatchData || null,
-            skipTime: skipTime || null,
+            watchData: {
+                src: query.prov !== 'zoro' ? watchData?.sources.find((src) => src.quality === 'default')?.url || watchData?.sources.find((src) => src.quality === '1080p')?.url || watchData?.sources[0]?.url || null : zoroWatchData?.sources.find((src) => src.quality === 'auto')?.url || zoroWatchData?.sources.find((src) => src.quality === '1080p')?.url || zoroWatchData?.sources[0]?.url || null,
+                subtitles: (query.prov !== 'zoro' ? watchData?.subtitles?.length > 0 : zoroWatchData?.subtitles?.length > 0) ? watchData?.subtitles.find((sub) => sub.lang === '[en-US] English') || zoroWatchData?.subtitles.find((sub) => sub.lang === 'English') : null,
+            },
+            skipTime: zoroWatchData?.intro || null,
         },
     }
 }
