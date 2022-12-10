@@ -1,0 +1,66 @@
+{
+  "module": "esnext",
+  "target": "es5",
+  "sourceMap": true,
+  "lib": [
+    "dom",
+    "dom.iterable",
+    "esnext"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@options/*": [
+        "./src/options/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ]
+    },
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "allowJs": true,
+  "skipLibCheck": true,
+  "strict": false,
+  "forceConsistentCasingInFileNames": true,
+  "noEmit": true,
+  "incremental": true,
+  "esModuleInterop": true,
+  "moduleResolution": "node",
+  "resolveJsonModule": true,
+  "isolatedModules": true,
+  "jsx": "preserve",
+  "exclude": [
+    "node_modules",
+    ".yarn"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "custom.d.ts"
+  ]
+}
