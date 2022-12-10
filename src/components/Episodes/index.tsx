@@ -68,6 +68,7 @@ const Episodes = ({anime, thumbnail}: {
                                         height={100}
                                         sizes={'100vw'}
                                         className={"w-[14.5rem] h-[8.1rem] rounded-[0.5rem] object-cover"}
+                                        unoptimized={true}
                                     />
                                 </div>
                                 <div className={"sm:ml-[2rem] lg:text-[80%] pb-[1rem] sm:pb-[1.3rem] md:pb-[0]"}>
