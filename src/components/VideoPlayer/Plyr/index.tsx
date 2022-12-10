@@ -3,11 +3,9 @@ import Hls from 'hls.js';
 import {useEffect, useState} from 'react';
 import ReactDom from 'react-dom';
 import 'plyr/dist/plyr.css';
-import episodes from "@components/Episodes";
 
-const VideoPlayer = ({src, subtitles, skipTime, banner, id, ep}: {
-    src: string,
-    subtitles: any,
+const VideoPlayer = ({watchData, skipTime, banner, id, ep}: {
+    watchData: any,
     skipTime: any,
     banner: string,
     id: number,
@@ -60,7 +58,7 @@ const VideoPlayer = ({src, subtitles, skipTime, banner, id, ep}: {
             const video = document.querySelector('video');
 
             if (!Hls.isSupported()) {
-                video.src = src;
+                video.src = `https://cors.proxy.consumet.org/${watchData.src}`;
                 const player = new Plyr(video, options);
                 player.poster = banner;
 
@@ -78,7 +76,7 @@ const VideoPlayer = ({src, subtitles, skipTime, banner, id, ep}: {
                 }, 5000);
             } else {
                 const hls = new Hls();
-                hls.loadSource(src);
+                hls.loadSource(`https://cors.proxy.consumet.org/${watchData.src}`);
 
                 hls.on(Hls.Events.MANIFEST_PARSED, () => {
                     const availableQualities = hls.levels.map((l) => l.height)
@@ -138,19 +136,19 @@ const VideoPlayer = ({src, subtitles, skipTime, banner, id, ep}: {
             }
         })()
         //eslint-disable-next-line
-    }, [src, banner]);
+    }, [watchData, banner]);
 
     return (
         <>
             <div className={"relative w-full"}>
                 <video className={"js-plyr plyr aspect-video"} id='player' key={'plyr'} crossOrigin={'anonymous'}
-                       src={src}>
-                    {subtitles?.length > 0 && (subtitles.find((sub) => sub.lang === 'English') || subtitles.find((sub) => sub.lang === '[en-US] English')) && (
+                       src={watchData.src}>
+                    {watchData?.subtitles && (
                         <track
                             label='English'
                             kind={'captions'}
                             srcLang='en'
-                            src={subtitles.find((sub) => sub.lang === 'English')?.url || subtitles.find((sub) => sub.lang === '[en-US] English')?.url}
+                            src={watchData.subtitles.url}
                         ></track>
                     )}
                 </video>
