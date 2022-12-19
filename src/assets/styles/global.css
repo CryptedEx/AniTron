@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+:root {
+    font-size: 62.5%;
+    --plyr-color-main: #A020F0;
+}
+
+body {
+    color: #e5e5e5;
+    background: #141414;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #b850f3;
+}
+
+@media (min-width: 1024px) {
+    .plyr__captions .plyr__caption {
+        font-size: 2vw !important
+    }
+
+    .plyr__caption {
+        background: rgba(0, 0, 0, .65) !important;
+    }
+
+}
+
+body,
+button,
+input,
+textarea {
+    font: 400 clamp(1.2rem, 1.5vw, 2rem)/1 'Helvetica', sans-serif;
+}
+
+#nprogress .bar {
+    background: #A020F0 !important;
+    height: 3.5px !important
+}
+#nprogress .peg {
+    background: #A020F0 !important;
+    box-shadow: 0 0 10px #A020F0, 0 0 5px #A020F0 !important;
+}
+#nprogress .spinner-icon {
+    display: none;
+}
