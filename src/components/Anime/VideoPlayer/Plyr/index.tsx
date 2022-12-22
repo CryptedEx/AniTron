@@ -140,8 +140,7 @@ const VideoPlayer = ({watchData, skipTime, banner}: {
         //todo add react skeleton
         <>
             <div className={"relative w-[90%] ml-auto mr-auto mt-[4rem]"}>
-                <video className={"js-plyr plyr aspect-video"} id='player' key={'plyr'} crossOrigin={'anonymous'}
-                       src={watchData.src}>
+                <video className={"js-plyr plyr aspect-video"} id='player' key={'plyr'} crossOrigin={'anonymous'}>
                     {watchData?.subtitles && (
                         <track
                             label='English'
