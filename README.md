@@ -1,7 +1,7 @@
 <p align="center">
   <div align="center">
     <a href="https://github.com/awe03/anitron">
-      <img src="https://media.discordapp.net/attachments/766123423914917909/1056099036966436924/logo.png" alt="Logo">
+      <img src="https://media.discordapp.net/attachments/766123423914917909/1056099806277283920/logo.png" alt="Logo">
     </a>
     <h3>AniTron - Your all in one source of entertainment</h3>
     <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
