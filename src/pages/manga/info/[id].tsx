@@ -20,13 +20,6 @@ const Info = ({manga}: {
                 openGraph={{
                     images: [
                         {
-                            url: manga.image,
-                            type: 'small',
-                            alt: `${
-                                manga.title.english || manga.title.userPreferred || manga.title.romaji
-                            }`,
-                        },
-                        {
                             url: manga.cover || manga.image,
                             type: 'small',
                             alt: `Cover of ${
