@@ -60,7 +60,6 @@ git clone https://github.com/awe03/anitron
 
 If you haven't already, install [Yarn](https://yarnpkg.com) and run the following commands in the root directory of the project
 ```bash
-```bash
 npm i -g yarn
 ```
 > This probably requires admin privileges
