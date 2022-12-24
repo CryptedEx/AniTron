@@ -29,7 +29,7 @@
   <a href="https://nextjs.org">
     <img src="https://img.shields.io/github/package-json/dependency-version/awe03/anitron/next?filename=package.json&color=fff&labelColor=000&logo=nextdotjs&style=flat-square">
   </a>
-  <a href="https://18.reactjs.org/">
+  <a href="https://reactjs.org/">
     <img src="https://img.shields.io/github/package-json/dependency-version/awe03/anitron/react?filename=package.json&color=5fd9fb&logo=react&labelColor=222435&style=flat-square">
   </a>
   <a href="https://tailwindcss.com/">
