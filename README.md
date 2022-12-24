@@ -64,6 +64,7 @@ npm i -g yarn
 ```
 > This probably requires admin privileges
 
+Head into the folder just created
 Download the dependencies
 ```bash
 yarn install
