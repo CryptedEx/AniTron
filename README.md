@@ -27,13 +27,13 @@
 
 <p align="center">
   <a href="https://nextjs.org">
-    <img src="https://img.shields.io/github/package-json/dependency-version/awe03/anitron/next?filename=frontend/package.json&color=fff&labelColor=000&logo=nextdotjs&style=flat-square">
+    <img src="https://img.shields.io/github/package-json/dependency-version/awe03/anitron/next?filename=package.json&color=fff&labelColor=000&logo=nextdotjs&style=flat-square">
   </a>
   <a href="https://18.reactjs.org/">
-    <img src="https://img.shields.io/github/package-json/dependency-version/awe03/anitron/react?filename=frontend/package.json&color=5fd9fb&logo=react&labelColor=222435&style=flat-square">
+    <img src="https://img.shields.io/github/package-json/dependency-version/awe03/anitron/react?filename=package.json&color=5fd9fb&logo=react&labelColor=222435&style=flat-square">
   </a>
   <a href="https://tailwindcss.com/">
-    <img src="https://img.shields.io/github/package-json/dependency-version/awe03/anitron/dev/tailwindcss?filename=frontend/package.json&color=37b8f1&logo=tailwindcss&labelColor=0b1120&style=flat-square&logoColor=38bdf8">
+    <img src="https://img.shields.io/github/package-json/dependency-version/awe03/anitron/dev/tailwindcss?filename=package.json&color=37b8f1&logo=tailwindcss&labelColor=0b1120&style=flat-square&logoColor=38bdf8">
   </a>
 </p>
 
@@ -45,7 +45,7 @@
 
 I recommend hosting this on [Vercel](https://vercel.com) or [Netlify](https://netlify.com)  as it is free and easy to setup. You can also host this on any other cloud provider or locally.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/awe03/anitron/tree/main&project-name=anitron&repo-name=anitron&root-directory=frontend&build-command=cd%20../%20%26%26%20yarn%20build&install-command=cd%20../%20%26%26%20yarn%20install)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/awe03/anitron/tree/main&project-name=anitron&repo-name=anitron&build-command=cd%20../%20%26%26%20yarn%20build&install-command=cd%20../%20%26%26%20yarn%20install)
 
 [![Deploy with netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/awe03/anitron)
 
