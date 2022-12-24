@@ -3,9 +3,12 @@ import Link from 'next/link';
 import {NextSeo} from 'next-seo';
 import Image from 'next/image';
 import {useWindowSize} from '@services/Functions'
+import {useRouter} from 'next/router';
 
 const PageNotFound = () => {
     const size = useWindowSize();
+    const router = useRouter();
+
     return (
         <>
             <NextSeo
@@ -17,7 +20,7 @@ const PageNotFound = () => {
                     <div className={"text-[#A020F0] text-[6rem] sm:text-[10rem] md:text-[12rem] lg:text-[13rem]"}>404</div>
                     <div className={"text-white mt-[1rem] text-[2rem] sm:text-[2.5rem] md:text-[2.7rem] lg:text-[3.2rem]"}>Page Not Found</div>
                     <div className={"text-white mt-[1rem] text-[1rem] sm:text-[1.3rem] md:text-[1.5rem] lg:text-[2.3rem]"}>Dont know where you are? I dont know either.</div>
-                    <Link className={"mt-[2rem]"} href={'/anime'}>
+                    <Link className={"mt-[2rem]"} href={`/${router.pathname.split('/')[1]}`}>
                         <button
                             className={"rounded-[0.4rem] cursor-pointer text-[1.2rem] sm:text-[1.4rem] md:text-[1.6rem] lg:text-[2rem] p-[1rem] px-[2rem] text-white bg-[#A020f0] hover:bg-[#c073f1] transition-colors"}>
                             Go back
