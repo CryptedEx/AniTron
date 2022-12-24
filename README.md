@@ -58,7 +58,7 @@ Download the repository
 git clone https://github.com/awe03/anitron
 ```
 
-If you haven't already, install [Yarn](https://yarnpkg.com) and run the following commands in the root directory of the project
+If you haven't already, install [Yarn](https://yarnpkg.com) by running
 ```bash
 npm i -g yarn
 ```
